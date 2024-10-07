@@ -5,6 +5,7 @@ import Knex from 'knex';
 import { Knex as KnexType } from 'knex';
 import knexConfig from '../knexfile';
 import puppeteer from 'puppeteer';
+import logger from './logger';
 
 dotenv.config();
 
@@ -25,12 +26,12 @@ let knex: KnexType;
 
 client.connect()
   .then(() => {
-    console.log('Connected to PostgreSQL');
-    console.log('Connecting to Knex');
+    logger.info('Connected to PostgreSQL');
+    logger.info('Connecting to Knex');
     knex = Knex(knexConfig.development);
 
     knex.migrate.latest()
-      .then(() => console.log('Database migrated'))
+      .then(() => logger.info('Database migrated'))
       .catch((err: Error) => console.error('Migration failed', err));
   })
   .catch((err: Error) => console.error('Connection error', err.stack));
@@ -56,7 +57,7 @@ app.post('/items', async (req: Request, res: Response): Promise<void> => {
     
     res.status(201).json(newItem);
   } catch (err: any) {
-    console.log('Error posting an item: ', err)
+    logger.error('Error posting an item: ', err)
     res.status(500).json({ error: 'Failed to add item to shopping list'});
   }
 });
@@ -88,25 +89,25 @@ app.delete('/items/:id', async (req: Request, res: Response): Promise<void> => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  logger.info(`Server is running on port ${port}`);
 });
 
 async function scrapeMercadoLivreProducts(keyword: string) {
-  console.log('Scraping Mercado Livre for:', keyword);
+  logger.info('Scraping Mercado Livre for:', keyword);
   const browser = await puppeteer.launch({
     headless: true,
     executablePath: '/usr/bin/chromium',
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
 
-  console.log('Browser launched');	
+  logger.info('Browser launched');	
   const page = await browser.newPage();
-  console.log('Page created');
+  logger.info('Page created');
   
   const searchUrl = `https://www.mercadolivre.com.br/jm/search?as_word=${encodeURIComponent(keyword)}`;
   await page.goto(searchUrl, { waitUntil: 'networkidle2' });
 
-  console.log('Page loaded');
+  logger.info('Page loaded');
 
   const products = await page.evaluate(() => {
     return Array.from(document.querySelectorAll('.ui-search-result__content')).map(product => {
@@ -123,7 +124,7 @@ async function scrapeMercadoLivreProducts(keyword: string) {
     });
   });
 
-  console.log('Products scraped:', products);
+  logger.info('Products scraped:', products);
 
   await browser.close();
   return products;
