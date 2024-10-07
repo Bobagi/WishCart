@@ -9,7 +9,10 @@ const logger = createLogger({
     format.json()
   ),
   transports: [
-    new transports.Console({ format: format.combine(format.colorize(), format.simple()) }), // Logs no console
+    new transports.Console({ format: format.combine(format.colorize(),         
+      format.printf(({ timestamp, message }) => {
+        return `${timestamp}: ${message}`;
+      })) }),
     new transports.File({ filename: 'app.log' })
   ]
 });
