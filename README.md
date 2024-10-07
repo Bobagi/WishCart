@@ -4,11 +4,10 @@ WishCart is a shopping assistant application that helps users find products onli
 
 ![Node.js](https://img.shields.io/badge/Node.js-%23339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![Knex.js](https://img.shields.io/badge/Knex.js-%23000000.svg?style=for-the-badge&logo=knex&logoColor=white)
+![Knex.js](https://img.shields.io/badge/Knex.js-FF6600?style=for-the-badge&logo=knex&logoColor=white&labelColor=gray)
 ![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Winston](https://img.shields.io/badge/Winston-%23000000.svg?style=for-the-badge&logo=winston&logoColor=white)
-![Knex](https://img.shields.io/badge/Knex-%23000000.svg?style=for-the-badge&logo=knex&logoColor=white)
+![Winston](https://img.shields.io/badge/Winston-%23FFFFFF.svg?style=for-the-badge&logo=winston&logoColor=black)
 ![Puppeteer](https://img.shields.io/badge/Puppeteer-%2300bfa5.svg?style=for-the-badge&logo=puppeteer&logoColor=white)
 ![MercadoLibre](https://img.shields.io/badge/MercadoLibre-%23FFE600.svg?style=for-the-badge&logo=mercadolibre&logoColor=white)
 
@@ -67,10 +66,6 @@ npx knex migrate:latest
 ### TypeScript
 
 **TypeScript** is a typed superset of JavaScript that compiles to plain JavaScript. We use TypeScript in WishCart to add static types to the code, reducing errors and making the codebase easier to maintain.
-
-### Knex.js
-
-**Knex.js** is a SQL query builder for Node.js. It's used in this project for handling migrations and writing database queries in an easy and database-agnostic way.
 
 ### PostgreSQL
 
