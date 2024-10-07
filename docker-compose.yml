@@ -1,6 +1,9 @@
 version: '3.8'
 services:
   app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: node:18
     volumes:
       - .:/app
@@ -12,6 +15,7 @@ services:
     command: sh -c "npm install && npm run dev"
     depends_on:
       - postgres
+    shm_size: '1gb'
 
   postgres:
     image: postgres:14
